@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Question extends Model
 {
     protected $fillable = [
-        'name', 'email', 'password',
+        'title', 'slug', 'body', 'view', 'answer', 'votes', 'best_answer_id', 'user_id',
     ];
 }
