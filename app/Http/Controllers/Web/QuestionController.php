@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Question;
+use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,7 +15,10 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        //
+        $data = array(
+            'questions' => Question::latest()->paginate(5)
+        );
+        return view('questions.index', $data);
     }
 
     /**
