@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
 use Illuminate\Support\str_plural;
+use Session;
 
 class QuestionController extends Controller
 {
@@ -28,7 +29,13 @@ class QuestionController extends Controller
 
     public function store(Request $request)
     {
-        //
+        $questionsData = $this->validateRequest();
+        if (Question::create($questionsData)) {
+            Session::flash('response', array('type' => 'success', 'message' => 'Question Added successfully!'));
+        } else {
+            Session::flash('response', array('type' => 'error', 'message' => 'Something Went wrong!'));
+        }
+        return redirect()->route('questions.index');
     }
 
     public function show(Question $question)
@@ -49,5 +56,12 @@ class QuestionController extends Controller
     public function destroy(Question $question)
     {
         //
+    }
+    private function validateRequest()
+    {
+        return request()->validate([
+            'title' => 'required|max:255',
+            'body' => 'required',
+        ]);
     }
 }
