@@ -20,7 +20,10 @@ class QuestionController extends Controller
 
     public function create()
     {
-        //
+        $data = array(
+            'questions' => new Question(),
+        );
+        return view('questions.create', $data);
     }
 
     public function store(Request $request)

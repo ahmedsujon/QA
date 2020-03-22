@@ -1,27 +1,20 @@
 @extends('layouts.app') @section('content')
 <main role="main" class="container">
     <div class="my-3 p-3 bg-white rounded shadow-sm">
+        <div class="ml-auto" style="float: right;">
+            <a href="{{ route('questions.create') }}" class="btn btn-outline-secondary">Ask Question</a>
+        </div>
         <h2 class="border-bottom border-gray pb-2 mb-0">Questions List</h2>
         <div class="card-body">
             @foreach ($questions as $question)
             <div class="media">
-                <div
-                    class="d-flex flex-column counters"
-                    style="padding-right: 15px;"
-                >
+                <div class="d-flex flex-column counters" style="padding-right: 15px;">
                     <div style="font-size: 13px;" class="vote">
-                        <strong style="padding-left: 14px;"
-                            >{{ $question->votes }} <br
-                        /></strong>
+                        <strong style="padding-left: 14px;">{{ $question->votes }} <br /></strong>
                         {{ str_plural('vote', $question->votes) }}
                     </div>
-                    <div
-                        style="font-size: 13px;"
-                        class="status {{ $question->status }}"
-                    >
-                        <strong style="padding-left: 14px;"
-                            >{{ $question->answers }} <br
-                        /></strong>
+                    <div style="font-size: 13px;" class="status {{ $question->status }}">
+                        <strong style="padding-left: 14px;">{{ $question->answers }} <br /></strong>
                         {{ str_plural('answer', $question->answers) }}
                     </div>
                     <div style="font-size: 13px;" class="view">
@@ -30,21 +23,12 @@
                 </div>
                 <div class="media-body">
                     <h3 class="mt-0">
-                        <a
-                            href="{{ $question->url }}"
-                            >{{ $question->title }}</a
-                        >
+                        <a href="{{ $question->url }}">{{ $question->title }}</a>
                     </h3>
                     <p class="lead">
                         Asked by
-                        <a
-                            href="{{ $question->user->url }}"
-                            >{{ $question->user->name }}</a
-                        >
-                        <small
-                            class="text-muted"
-                            >{{ $question->created_date }}</small
-                        >
+                        <a href="{{ $question->user->url }}">{{ $question->user->name }}</a>
+                        <small class="text-muted">{{ $question->created_date }}</small>
                     </p>
                     {!! substr($question->body,0,250) !!}
                 </div>
